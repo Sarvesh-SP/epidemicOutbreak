@@ -99,4 +99,10 @@ class Population():
         ded_percentage = round((total_dedC / sim.pop_size) * 100, 4)
 
         print(f"\n----Day #{sim.day_number}----")
-        print(f"")
+        print(f"----Percentage of Population Infected: {inf_percentage}")
+        print(f"----Percentage of Population Death: {ded_percentage} %")
+        print(f"----Total People Infected: {total_infC} / {sim.pop_size}")
+        print(f"----Total Deaths: {total_dedC} / {sim.pop_size}")
+
+    def graphics():
+        pass
