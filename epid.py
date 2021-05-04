@@ -1,4 +1,5 @@
 import random
+import math
 
 
 class Simulation():
@@ -9,6 +10,9 @@ class Simulation():
         self.day_number = 1
         print("To simulate an epidemic outbreak, we must know the population size.")
         self.pop_size = int(input("---Enter the Population size: "))
+
+        root = math.sqrt(self.pop_size)
+
         print("\nWe must first start by infecting a portion of the population.")
         self.inf_percentage = float(
             input("---Enter the Percentage(0 - 100) of the population to initially infect: "))
@@ -107,8 +111,8 @@ class Population():
         ded_percentage = round((total_dedC / sim.pop_size) * 100, 4)
 
         print(f"\n----Day #{sim.day_number}----")
-        print(f"----Percentage of Population Infected: {inf_percentage}")
-        print(f"----Percentage of Population Death: {ded_percentage} %")
+        print(f"----Percentage of Population Infected: {inf_percentage}%")
+        print(f"----Percentage of Population Death: {ded_percentage}%")
         print(f"----Total People Infected: {total_infC} / {sim.pop_size}")
         print(f"----Total Deaths: {total_dedC} / {sim.pop_size}")
 
