@@ -1,3 +1,3 @@
 # epidemicOutbreak
 
-- 40th Day.
+- 40th Day
