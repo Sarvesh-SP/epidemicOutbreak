@@ -13,6 +13,15 @@ class Simulation():
 
         root = math.sqrt(self.pop_size)
 
+        if int(root + 0.5)**2 != self.pop_size:
+            root = round(root, 0)
+            self.grid_size = int(root)
+            self.pop_size = self.grid_size**2
+            print(
+                f"Rounding population size to {self.pop_size} for visual purposes.")
+        else:
+            self.grid_size = int(math.sqrt(self.pop_size))
+
         print("\nWe must first start by infecting a portion of the population.")
         self.inf_percentage = float(
             input("---Enter the Percentage(0 - 100) of the population to initially infect: "))
