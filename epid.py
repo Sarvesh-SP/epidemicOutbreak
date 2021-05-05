@@ -70,76 +70,21 @@ class Person():
 
 
 class Population():
-    """Models a whole Population"""
+    """A class to model a whole population of Person Objects"""
+    def __init__():
+        pass
 
-    def __init__(self, sim):
-        self.population = []
+    def initial_infection():
+        pass
 
-        for _ in range(sim.pop_size):
-            person = Person()
-            self.population.append(person)
+    def spread_infection():
+        pass
 
-    def initial_infection(self, sim):
-        infected_count = int(round(sim.inf_percentage*sim.pop_size, 0))
+    def update():
+        pass
 
-        for x in range(infected_count):
-            self.population[x].is_infected = True
-            self.population[x].days_infected = True
-        random.shuffle(self.population)
-
-    def spread_infection(self, sim):
-
-        for x in range(len(self.population)):
-            if x == 0:
-                if self.population[x+1].is_infected:
-                    self.population[x].infect(sim)
-            elif x < len(self.population) - 1:
-                if self.population[x+1].is_infected or self.population[x-1].is_infected:
-                    self.population[x].infect(sim)
-            elif x == len(self.population) - 1:
-                if self.population[x-1].is_infected:
-                    self.population[x].infect(sim)
-
-    def update(self, sim):
-        sim.day_number += 1
-
-        for x in self.population:
-            x.update(sim)
-
-    def display_statistics(self, sim):
-        total_infC = 0
-        total_dedC = 0
-
-        for x in self.population:
-            if x.is_infected:
-                total_infC += 1
-                if x.is_dead:
-                    total_dedC += 1
-
-        inf_percentage = round((total_infC / sim.pop_size) * 100, 4)
-        ded_percentage = round((total_dedC / sim.pop_size) * 100, 4)
-
-        print(f"\n----Day #{sim.day_number}----")
-        print(f"----Percentage of Population Infected: {inf_percentage}%")
-        print(f"----Percentage of Population Death: {ded_percentage}%")
-        print(f"----Total People Infected: {total_infC} / {sim.pop_size}")
-        print(f"----Total Deaths: {total_dedC} / {sim.pop_size}")
-
-    def graphics(self):
-        """A Graphical representation for a population. O is healthy, I is Infected, X is dead."""
-
-        status = []
-        for person in self.population:
-            if person.is_dead:
-                char = 'X'
-            elif person.is_infected:
-                char = 'I'
-            else:
-                char = 'O'
-            status.append(char)
-
-        for x in status:
-            print(x, end="-")
+    def display_statistics():
+        pass
 
 
 sim = Simulation()
