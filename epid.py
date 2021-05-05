@@ -1,23 +1,26 @@
 from main import *
+from graphics import graphics
+import tkinter
 
 sim = Simulation()
+
+
+WINDOW_WIDTH = 600
+WINDOW_HEIGHT = 600
+
+sim_window = tkinter.Tk()
+sim_window.title("Epidemic Outbreak")
+sim_canvas = tkinter.Canvas(
+    sim_window, width=WINDOW_WIDTH, height=WINDOW_HEIGHT, bg='lightblue')
+sim_canvas.pack(side=tkinter.LEFT)
+
 pop = Population(sim)
 
 pop.initial_infection(sim)
 pop.display_statistics(sim)
+input("Press enter to begin simulation.")
 
 
-pop.graphics()
-
-
-input("\nPress enter to begin the simulation")
-
-
-for x in range(1, sim.sim_days):
+for i in range(1, sim.sim_days):
     pop.spread_infection(sim)
     pop.update(sim)
-    pop.display_statistics(sim)
-    pop.graphics()
-
-    if x != sim.sim_days - 1:
-        input("\nPress enter to advance to the next day.")

@@ -122,6 +122,7 @@ class Population():
                                 self.population[i][j].infect(sim)
                         else:
                             if self.population[i][j - 1].is_infected or self.population[i][j + 1].is_infected or self.population[i-1][j].is_infected:
+                                self.population[i][j].infect(sim)
                     else:
                         if j == 0:
                             if self.population[i][j + 1].is_infected or self.population[i+1][j].is_infected or self.population[i - 1][j]:
@@ -131,6 +132,7 @@ class Population():
                                 self.population[i][j].infect(sim)
                         else:
                             if self.population[i][j - 1].is_infected or self.population[i][j + 1].is_infected or self.population[i+1][j].is_infected or self.population[i - 1][j]:
+                                self.population[i][j].infect(sim)
 
     def update(self, simulation):
         """Update the whole population by updating each individual Person"""
