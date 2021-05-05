@@ -24,3 +24,12 @@ input("Press enter to begin simulation.")
 for i in range(1, sim.sim_days):
     pop.spread_infection(sim)
     pop.update(sim)
+    pop.display_statistics(sim)
+    graphics(sim, pop, sim_canvas)
+
+    sim_window.update()
+
+    if i != sim.sim_days - 1:
+        sim_canvas.delete('all')
+
+input("PRESS ENTER TO CLOSE!!")

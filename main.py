@@ -93,7 +93,7 @@ class Population():
             x = random.randint(0, simulation.grid_size - 1)
             y = random.randint(0, simulation.grid_size - 1)
 
-            if not self.population[x][y]:
+            if not self.population[x][y].is_infected:
                 self.population[x][y].is_infected = True
                 self.population[x][y].days_infected = 1
                 infections += 1
@@ -102,7 +102,7 @@ class Population():
         """Spread the infection in a 2D array to all adjacent people to a given person"""
         for i in range(sim.grid_size):
             for j in range(sim.grid_size):
-                if not self.population[i][j].is_dead:
+                if self.population[i][j].is_dead == False:
                     if i == 0:
                         if j == 0:
                             if self.population[i][j + 1].is_infected or self.population[i+1][j].is_infected:
@@ -125,13 +125,13 @@ class Population():
                                 self.population[i][j].infect(sim)
                     else:
                         if j == 0:
-                            if self.population[i][j + 1].is_infected or self.population[i+1][j].is_infected or self.population[i - 1][j]:
+                            if self.population[i][j + 1].is_infected or self.population[i+1][j].is_infected or self.population[i - 1][j].is_infected:
                                 self.population[i][j].infect(sim)
                         elif j == sim.grid_size - 1:
-                            if self.population[i][j - 1].is_infected or self.population[i+1][j].is_infected or self.population[i - 1][j]:
+                            if self.population[i][j - 1].is_infected or self.population[i+1][j].is_infected or self.population[i - 1][j].is_infected:
                                 self.population[i][j].infect(sim)
                         else:
-                            if self.population[i][j - 1].is_infected or self.population[i][j + 1].is_infected or self.population[i+1][j].is_infected or self.population[i - 1][j]:
+                            if self.population[i][j - 1].is_infected or self.population[i][j + 1].is_infected or self.population[i+1][j].is_infected or self.population[i - 1][j].is_infected:
                                 self.population[i][j].infect(sim)
 
     def update(self, simulation):
