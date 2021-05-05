@@ -71,17 +71,43 @@ class Person():
 
 class Population():
     """A class to model a whole population of Person Objects"""
-    def __init__():
-        pass
 
-    def initial_infection():
-        pass
+    def __init__(self, simulation):
+        """Initialize attributes"""
+        self.population = []
+
+        for i in range(simulation.grid_size):
+            row = []
+            for j in range(simulation.grid_size):
+                person = Person()
+                row.append(person)
+            self.population.append(row)
+
+    def initial_infection(self, simulation):
+        """Infect an initial portion of the population based on initial conditions of the sim"""
+        infected_count = int(
+            round(simulation.inf_percentage*simulation.pop_size, 0))
+
+        infections = 0
+        while infections < infected_count:
+            x = random.randint(0, simulation.grid_size - 1)
+            y = random.randint(0, simulation.grid_size - 1)
+
+            if not self.population[x][y]:
+                self.population[x][y].is_infected = True
+                self.population[x][y].days_infected = 1
+                infections += 1
 
     def spread_infection():
         pass
 
-    def update():
-        pass
+    def update(self, simulation):
+        """Update the whole population by updating each individual Person"""
+        simulation.day_number += 1
+
+        for row in self.population:
+            for person in row:
+                person.update(simulation)
 
     def display_statistics():
         pass
