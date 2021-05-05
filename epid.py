@@ -98,8 +98,39 @@ class Population():
                 self.population[x][y].days_infected = 1
                 infections += 1
 
-    def spread_infection():
-        pass
+    def spread_infection(self, sim):
+        """Spread the infection in a 2D array to all adjacent people to a given person"""
+        for i in range(sim.grid_size):
+            for j in range(sim.grid_size):
+                if not self.population[i][j].is_dead:
+                    if i == 0:
+                        if j == 0:
+                            if self.population[i][j + 1].is_infected or self.population[i+1][j].is_infected:
+                                self.population[i][j].infect(sim)
+                        elif j == sim.grid_size - 1:
+                            if self.population[i][j - 1].is_infected or self.population[i+1][j].is_infected:
+                                self.population[i][j].infect(sim)
+                        else:
+                            if self.population[i][j - 1].is_infected or self.population[i][j + 1].is_infected or self.population[i+1][j].is_infected:
+                                self.population[i][j].infect(sim)
+                    elif i == sim.grid_size - 1:
+                        if j == 0:
+                            if self.population[i][j + 1].is_infected or self.population[i-1][j].is_infected:
+                                self.population[i][j].infect(sim)
+                        elif j == sim.grid_size - 1:
+                            if self.population[i][j - 1].is_infected or self.population[i-1][j].is_infected:
+                                self.population[i][j].infect(sim)
+                        else:
+                            if self.population[i][j - 1].is_infected or self.population[i][j + 1].is_infected or self.population[i-1][j].is_infected:
+                    else:
+                        if j == 0:
+                            if self.population[i][j + 1].is_infected or self.population[i+1][j].is_infected or self.population[i - 1][j]:
+                                self.population[i][j].infect(sim)
+                        elif j == sim.grid_size - 1:
+                            if self.population[i][j - 1].is_infected or self.population[i+1][j].is_infected or self.population[i - 1][j]:
+                                self.population[i][j].infect(sim)
+                        else:
+                            if self.population[i][j - 1].is_infected or self.population[i][j + 1].is_infected or self.population[i+1][j].is_infected or self.population[i - 1][j]:
 
     def update(self, simulation):
         """Update the whole population by updating each individual Person"""
@@ -109,8 +140,26 @@ class Population():
             for person in row:
                 person.update(simulation)
 
-    def display_statistics():
-        pass
+    def display_statistics(self, sim):
+        """Display the statistics of the population"""
+        total_inf_count = 0
+        total_ded_count = 0
+
+        for row in self.population:
+            for person in row:
+                if person.is_infected:
+                    total_inf_count += 1
+                    if person.is_dead:
+                        total_ded_count += 1
+
+        infected_percent = round(100*(total_inf_count/sim.pop_size), 4)
+        death_percent = round(100*(total_ded_count/sim.pop_size), 4)
+
+        print(f"\n----Day # {sim.day_number}----")
+        print(f"Percentage of Population Infected: {infected_percent}%")
+        print(f"Percentage of Population Dead: {death_percent}%")
+        print(f"Total People Infected: {total_inf_count} / {sim.pop_size}")
+        print(f"Total Deaths: {total_ded_count} / {sim.pop_size}")
 
 
 sim = Simulation()
